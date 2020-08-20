@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/dboland77/Tic-Tac-Toe/issues"
   },
-  "homepage": "https://github.com/dboland77/Tic-Tac-Toe#readme"
+  "homepage": "https://github.com/dboland77/Tic-Tac-Toe#readme",
+  "dependencies": {
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "source-map-loader": "^1.0.2",
+    "webpack": "^4.44.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.12"
+  }
 }
