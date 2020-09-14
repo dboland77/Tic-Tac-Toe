@@ -1,13 +1,16 @@
 var path = require("path");
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index.js",
-  mode: "development",
+  entry: './src/index.js',
   output: {
-    path: __dirname + "/dist",
-    publicPath: "/",
-    filename: "./main.js",
+    path: path.resolve(__dirname, 'build'), // change this
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: "./build",
   },
 
   module: {
@@ -30,21 +33,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: "react",
     }),
+    new HTMLWebpackPlugin({
+      template: path.resolve('./index.html'),
+    })
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 9000,
-    watchContentBase: true,
-    progress: true,
-  },
-  // devtool: "inline-source-map",
-  // When importing a module whose path matches one of the following, just
-  // assume a corresponding global variable exists and use that instead.
-  // This is important because it allows us to avoid bundling all of our
-  // dependencies, which allows browsers to cache those libraries between builds.
-  // externals: {
-  //   react: "React",
-  //   "react-dom": "ReactDOM",
-  // },
+    contentBase: "./build",
+  }
 };
