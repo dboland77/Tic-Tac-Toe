@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Board from "./Board";
 
 class Game extends React.Component {
@@ -13,6 +13,12 @@ class Game extends React.Component {
       xIsNext: true,
       stepNumber: 0,
     };
+  }
+
+  restartGame(){
+    // alert("Hello");
+   
+    console.log(this.state);
   }
 
   handleClick(i) {
@@ -47,10 +53,12 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
+      const desc = move ? "Go to move " + move : "Go to start";
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className="movesButton" onClick={() => this.jumpTo(move)}>
+            {desc}
+          </button>
         </li>
       );
     });
@@ -58,23 +66,34 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
-    } else {
+    } else if (moves.length===10){
+      status = "It's a draw!"
+    }
+     else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
+      <Fragment>
+        <div className="container">
+          <h1> TIC TAC TOE </h1>
+          <h2>{status}</h2>
         </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+        <div className="game">
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <ul className="movesList">{moves}</ul>
+          </div>
         </div>
-      </div>
+        <div >
+          <button onClick={this.restartGame}> New Game </button>
+        </div>
+      </Fragment>
     );
   }
 }
