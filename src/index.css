@@ -30,6 +30,7 @@ h1,
 h2 {
   color: dodgerblue;
   text-shadow: 1px 1px 2px firebrick;
+  font-weight: 900;
 }
 
 .square {
@@ -63,19 +64,51 @@ h2 {
   width: 7rem;
   margin: 5px;
   font-size: 15px;
+  opacity: 0.5;
 }
 
 .newGame {
-  padding: 0.5rem;
-  border-radius: 10px;
-  background: firebrick;
+  padding: 2rem;
+  border-radius: 30px;
+  background: blue;
   color: white;
   cursor: pointer;
   outline: none;
   text-align: center;
-  width: 7rem;
-  margin: 5px;
-  font-size: 15px;
+  width: 11rem;
+  margin: 8rem;
+  font-size: 1.2rem;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  60%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+.movesButton:hover {
+  animation: bounce 1s;
+  opacity: 1;
+}
+
+.newGame:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .movesList {
@@ -93,6 +126,7 @@ h2 {
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+  margin-left: 10rem;
 }
 
 .container {

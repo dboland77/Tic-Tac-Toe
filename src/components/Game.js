@@ -15,16 +15,11 @@ class Game extends React.Component {
     };
   }
 
-  restartGame(){
-    // alert("Hello");
-   
-    console.log(this.state);
-  }
-
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -39,6 +34,18 @@ class Game extends React.Component {
       xIsNext: !this.state.xIsNext,
     });
   }
+
+  restartGame = () => {
+    this.setState({
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
+      xIsNext: this.state.xIsNext,
+      stepNumber: 0,
+    });
+  };
 
   jumpTo(step) {
     this.setState({
@@ -66,10 +73,9 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
-    } else if (moves.length===10){
-      status = "It's a draw!"
-    }
-     else {
+    } else if (moves.length === 10) {
+      status = "It's a draw!";
+    } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
@@ -78,20 +84,23 @@ class Game extends React.Component {
         <div className="container">
           <h1> TIC TAC TOE </h1>
           <h2>{status}</h2>
-        </div>
-        <div className="game">
-          <div className="game-board">
-            <Board
-              squares={current.squares}
-              onClick={(i) => this.handleClick(i)}
-            />
+          <div className="game">
+            <div className="game-board">
+              <Board
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+              />
+            </div>
+            <div className="game-info">
+              <ul className="movesList">{moves}</ul>
+            </div>
           </div>
-          <div className="game-info">
-            <ul className="movesList">{moves}</ul>
+          <div>
+            <button className="newGame" onClick={this.restartGame}>
+              {" "}
+              New Game{" "}
+            </button>
           </div>
-        </div>
-        <div >
-          <button onClick={this.restartGame}> New Game </button>
         </div>
       </Fragment>
     );
